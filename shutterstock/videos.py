@@ -399,6 +399,15 @@ videos.add_command(create_video_collection)
 @click.command()
 @click.option("--page", multiple=False, help="Page number", type=int)
 @click.option("--per-page", multiple=False, help="Number of results per page", type=int)
+@click.option(
+    "--embed",
+    multiple=True,
+    help=(
+        "Which sharing information to include in the response, such as a URL to the"
+        " collection"
+    ),
+    type=str,
+)
 def get_video_collection_list(**kwargs):
     """
     List video collections
@@ -412,6 +421,21 @@ videos.add_command(get_video_collection_list)
 
 @click.command()
 @click.argument("id")
+@click.option(
+    "--embed",
+    multiple=True,
+    help=(
+        "Which sharing information to include in the response, such as a URL to the"
+        " collection"
+    ),
+    type=str,
+)
+@click.option(
+    "--share-code",
+    multiple=False,
+    help="Code to retrieve a shared collection",
+    type=str,
+)
 def get_video_collection(**kwargs):
     """
     Get the details of video collections
@@ -516,6 +540,12 @@ videos.add_command(add_video_collection_items)
 @click.argument("id")
 @click.option("--page", multiple=False, help="Page number", type=int)
 @click.option("--per-page", multiple=False, help="Number of results per page", type=int)
+@click.option(
+    "--share-code",
+    multiple=False,
+    help="Code to retrieve the contents of a shared collection",
+    type=str,
+)
 @click.option("--sort", multiple=False, help="Sort order", type=str)
 def get_video_collection_items(**kwargs):
     """

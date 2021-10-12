@@ -174,7 +174,10 @@ def images():
 @click.option(
     "--people-ethnicity",
     multiple=True,
-    help="Show images with people of the specified ethnicities",
+    help=(
+        "Show images with people of the specified ethnicities, or start with NOT to"
+        " show images without those ethnicities"
+    ),
     type=str,
 )
 @click.option(
@@ -646,14 +649,15 @@ images.add_command(add_image_collection_items)
 
 @click.command()
 @click.argument("id")
+@click.option("--page", multiple=False, help="Page number", type=int)
+@click.option("--per-page", multiple=False, help="Number of results per page", type=int)
 @click.option(
     "--share-code",
     multiple=False,
     help="Code to retrieve the contents of a shared collection",
     type=str,
 )
-@click.option("--page", multiple=False, help="Page number", type=int)
-@click.option("--per-page", multiple=False, help="Number of results per page", type=int)
+@click.option("--sort", multiple=False, help="Sort order", type=str)
 def get_image_collection_items(**kwargs):
     """
     Get the contents of image collections
